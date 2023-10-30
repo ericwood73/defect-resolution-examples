@@ -1,0 +1,16 @@
+{
+    "ps2_ps3": {
+        "from": "ps2",
+        "video": {
+            "url": "",
+            "startAzimuth": {
+                "theta": 0.0,
+                "phi": 0.0
+            },
+            "endAzimuth": {
+                "theta": 0.0,
+                "phi": 1.5708
+            }
+        } 
+    }
+}

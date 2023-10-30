@@ -1,0 +1,177 @@
+[
+    {
+        "id": 0,
+        "url": "/assets/placeholder/photospheres/mountains.jpeg",
+        "rotation": {
+            "disabled": false,
+            "start": {"theta": 0, "phi": 0.5}
+            
+        },
+        "hotspots": [
+            {
+                "id": 0,
+                "label": "PS1",
+                "cssText": "background-color:white;width:50px;height:50px;border-radius:50%;line-height:50px;text-align:center;",
+                "position": {
+                    "theta": 0.2,
+                    "phi": 0.5
+                },
+                "action": {
+                    "type": "Photosphere",
+                    "value": "1"
+                }
+            },
+            {
+                "id": 1,
+                "label": "M-1",
+                "cssText": "background-color:white;width:50px;height:50px;border-radius:50%;line-height:50px;text-align:center;",
+                "position": {
+                    "theta": 0,
+                    "phi": 1
+                },
+                "action": {
+                    "type": "Modal",
+                    "value": "0"
+                }
+            },
+            {
+                "id": 8,
+                "label": "M-2",
+                "cssText": "background-color:white;width:50px;height:50px;border-radius:50%;line-height:50px;text-align:center;",
+                "position": {
+                    "theta": 0,
+                    "phi": 1.5
+                },
+                "action": {
+                    "type": "Modal",
+                    "value": "1"
+                }
+            },
+            {
+                "id": 9,
+                "label": "M-3",
+                "cssText": "background-color:white;width:50px;height:50px;border-radius:50%;line-height:50px;text-align:center;",
+                "position": {
+                    "theta": 0,
+                    "phi": 2
+                },
+                "action": {
+                    "type": "Modal",
+                    "value": "2"
+                }
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "url": "/assets/placeholder/photospheres/grass.jpeg",
+        "rotation": {
+            "disable": false,
+            "limit": {
+                "min": {"theta": -1.4, "phi": -0.5},
+                "max": {"theta": 1.4, "phi": 1}
+            }
+        },
+        "zoom": { "min": 75, "max": 75},
+        "hotspots": [
+            {
+                "id": 2,
+                "label": "PS3",
+                "cssText": "background-color:white;width:50px;height:50px;border-radius:50%;line-height:50px;text-align:center;",
+                "position": {
+                    "theta": 0,
+                    "phi": -0.2
+                },
+                "action": {
+                    "type": "Photosphere",
+                    "value": "3"
+                }
+            },
+            {
+                "id": 3,
+                "label": "PS2",
+                "cssText": "background-color:white;width:50px;height:50px;border-radius:50%;line-height:50px;text-align:center;",
+                "position": {
+                    "theta": 0,
+                    "phi": 0.2
+                },
+                "action": {
+                    "type": "Photosphere",
+                    "value": "2"
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "url": "/assets/placeholder/photospheres/lake.jpeg",
+        "rotation": {
+            "disable": false,
+            "start": {"theta": 0, "phi": 0}
+        },
+        "hotspots": [
+            {
+                "id": 4,
+                "label": "PS3",
+                "cssText": "background-color:white;width:50px;height:50px;border-radius:50%;line-height:50px;text-align:center;",
+                "position": {
+                    "theta": 0,
+                    "phi": -0.2
+                },
+                "action": {
+                    "type": "Photosphere",
+                    "value": "3"
+                }
+            },
+            {
+                "id": 5,
+                "label": "PS1",
+                "cssText": "background-color:white;width:50px;height:50px;border-radius:50%;line-height:50px;text-align:center;",
+                "position": {
+                    "theta": 0,
+                    "phi": 0.25
+                },
+                "action": {
+                    "type": "Photosphere",
+                    "value": "1"
+                }
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "url": "/assets/placeholder/photospheres/alley.jpeg",
+        "rotation": {
+            "disable": false,
+            "start": {"theta": 0, "phi": 0}
+        },
+        "hotspots": [
+            {
+                "id": 6,
+                "label": "PS0",
+                "cssText": "background-color:white;width:50px;height:50px;border-radius:50%;line-height:50px;text-align:center;",
+                "position": {
+                    "theta": 0,
+                    "phi": -0.2
+                },
+                "action": {
+                    "type": "Photosphere",
+                    "value": "0"
+                }
+            },
+            {
+                "id": 7,
+                "label": "PS2",
+                "cssText": "",
+                "position": {
+                    "theta": 0,
+                    "phi": 0.25
+                },
+                "action": {
+                    "type": "Photosphere",
+                    "value": "2"
+                }
+            }
+        ]
+    }
+]

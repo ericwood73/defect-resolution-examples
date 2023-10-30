@@ -1,0 +1,5 @@
+{
+    "mytestroute": { "photosphere": 0 },
+    "mysecondtestroute": { "photosphere": 0, "hotspot": 1 },
+    "mythirdtestroute": { "photosphere": 0, "hotspot": 1, "modal": 0 }
+}

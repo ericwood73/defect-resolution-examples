@@ -1,0 +1,80 @@
+{
+    "regions": {
+        "about-us": {
+            "povs": {
+                "pov1": {
+                    "view": {
+                       "layers": [
+                          {
+                              "url": "/images/photospheres/pov1.png",
+                              "radius": 2500
+                          }
+                       ]
+                    },
+                    "cameraLimits": {
+                        "alpha":{
+                            "min": 90,
+                            "max": 180
+                        },
+                        "zoom": {
+                            "max": 0.6
+                        }
+                    },
+                    "hotspotInstances": {
+                        "hs1": {
+                            "alpha": 180,
+                            "beta": 10,
+                            "layer": 0
+                        }
+                    },
+                    "contentFrameInstances": {
+                        "cf1": {
+                            "alpha": 90,
+                            "beta": 20
+                        }
+                    }
+                },
+                "pov2": {
+                    "hotspotInstances": {
+                        
+                    }
+                }
+            },
+            "hotspots": {
+                "hs1": {
+                    "contentId": "content1",
+                    "cta": {
+                        "label": "test-label",
+                        "externalLink": null,
+                        "route": "pov2#hs2"
+                    }
+                }
+            },
+            "contentFrames": {
+                "cf1": {
+                    "type": "video",
+                    "url": "/videos/about-us/video1.mp4",
+                    "autoplay": "true"
+                }
+            }
+        }
+    },
+    "transitions": [ 
+        {
+            "pov1_pov2": {
+                "departureHotspot": "hs1",
+                "arrivalAzimuth": {
+                    "alpha": 45,
+                    "beta": 10
+                },
+                "video": "/videos/transitions/pov1_pov2.mop4"
+            },
+            "pov2": {
+                "arrivalAzimuth": {
+                    "alpha": 45,
+                    "beta": 10
+                }
+            }
+        }
+    ]
+}

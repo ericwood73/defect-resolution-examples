@@ -1,0 +1,31 @@
+[
+    {
+        "id": 0,
+        "type": "Text",
+        "title": "Test Text Modal"
+    },
+    {
+        "id": 1,
+        "type": "CTA",
+        "title": "Test CTA Modal Open Photosphere",
+        "ctaButton": {
+            "title": "Open Photosphere 1",
+            "action": {
+                "type": "Photosphere",
+                "value": 1
+            }
+        }
+    },
+    {
+        "id": 2,
+        "type": "CTA",
+        "title": "Test CTA Modal External Link",
+        "ctaButton": {
+            "title": "Open Google",
+            "action": {
+                "type": "ExternalLink",
+                "value": "https://google.com"
+            }
+        }
+    }
+]
