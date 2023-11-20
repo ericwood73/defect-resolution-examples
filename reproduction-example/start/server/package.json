@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "fastify start -l info -p 3001 --watch --pretty-logs index.js"
   },
   "author": "",
   "license": "ISC",
