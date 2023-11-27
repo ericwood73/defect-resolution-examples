@@ -44,7 +44,7 @@ export const createScene = (canvas) => {
     });
 
     // Notify subscribers that the scene has been created
-    fire(eventNames.sceneCreated);
+    fire(eventNames.sceneCreated, _scene);
 };
 
 

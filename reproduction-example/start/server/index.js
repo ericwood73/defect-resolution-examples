@@ -39,7 +39,7 @@ fastify.register(async function (fastify) {
     })
 });
 
-fastify.listen({ port: 3000 }, (err, address) => {
+fastify.listen({ port: 3000, host:"0.0.0.0" }, (err, address) => {
     if(err) {
         console.error(err);
         process.exit(1);
@@ -61,10 +61,14 @@ export const pushInitialState = (connection, req) => {
 const handleClose = (connection, req) => {
     const userId = connection.userId;
     console.log(`Client ${userId} disconnected`);
-    unregisterUser(connection, req);
-    // remove the user from the room
-    leaveRoom(userId);
-    removeUser(userId);
+    try {
+        unregisterUser(connection, req);
+        // remove the user from the room
+        leaveRoom(userId);
+        removeUser(userId);
+    } catch (e) {
+        console.error("Error while closng connection: ", e);
+    }
 };
 
 const handleMessage = (connection, req, messageData) => {
@@ -73,7 +77,12 @@ const handleMessage = (connection, req, messageData) => {
     console.log("In handleMessage - messageData: ", messageData);
     const handler = messageHandlers[messageData.messageName];
     if(handler) {
-        handler(connection.userId, messageData.data);
+        try {
+            handler(connection.userId, messageData.data);
+        } catch (e) {
+            console.error(`Error handling ${messageData.messageName} message `, messageData.data);
+        }
+        
     }
 };
 

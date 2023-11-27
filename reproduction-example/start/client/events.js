@@ -8,8 +8,10 @@ export const eventNames = {
     ...serverEventNames,
     localUserJoinedRoom: 'localUserJoinedRoom',
 	remoteUserJoinedRoom: 'remoteUserJoinedRoom',
+	remoteAvatarCreated: 'remoteAvatarCreated',
 	remoteUserPositionUpdated: 'remoteUserPositionUpdated',
 	sceneCreated: 'sceneCreated',
+	sceneDestroyed: 'sceneDestroyed',
     backgroundSizeUpdated: 'backgroundSizeUpdated',
     canvasResized: 'canvasResized',
 };

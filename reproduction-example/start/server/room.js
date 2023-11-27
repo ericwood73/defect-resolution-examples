@@ -47,7 +47,8 @@ export const joinRoom = (userId, { roomId = 'defaultRoom' } = {}) => {
 export const leaveRoom = (userId) => {
     const currentRoom = getCurrentRoom(userId);
     if (currentRoom) {
-        currentRoom.users.remove(userId);
+        console.log("In room.leaveRoom - currentRoom: ", currentRoom);
+        currentRoom.users = currentRoom.users.filter(id => id !== userId);
         pushRoomStates([currentRoom.id]);
         pushToAll(serverEventNames.userLeftRoom, { userId, roomId: currentRoom.id });
     }

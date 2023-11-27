@@ -50,7 +50,38 @@ export const getLocalStorageValue = (key, returnValueIfNotFound) => {
 	return returnValueIfNotFound;
 };
 
-// Function to get an immutable snapshout of an object
+
+
+// Function to get an immutable snapshot of an object that can handle circular references
 export const getImmutableSnapshot = (obj) => {
-	return JSON.parse(JSON.stringify(obj));
+	const cache = new WeakMap();
+
+	const clone = (value) => {
+		if (value === null || typeof value !== 'object') {
+			return value;
+		}
+
+		if (cache.has(value)) {
+			return cache.get(value);
+		}
+
+		const isArray = Array.isArray(value);
+		const clonedValue = isArray ? [] : {};
+
+		cache.set(value, clonedValue);
+
+		if (isArray) {
+			value.forEach((item, index) => {
+				clonedValue[index] = clone(item);
+			});
+		} else {
+			Object.keys(value).forEach((key) => {
+				clonedValue[key] = clone(value[key]);
+			});
+		}
+
+		return clonedValue;
+	};
+
+	return clone(obj);
 };

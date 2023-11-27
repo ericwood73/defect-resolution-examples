@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;" viewBox="-99 -1 331 330" x="0px" y="0px" fil="none">
+    <defs>
+        <style type="text/css">
+   
+          /* plume */
+          .fil0 {fill:#fadf43; stroke: #fadf43; stroke-width: 4;}
+
+          /* nozzle */
+          .fil2 {fill:#030303}
+
+          /* window */
+          .fil3 {fill:#aef6f9;fill-rule:nonzero}
+
+          /* rocket body */
+          .fil1 {fill:#0992f4;fill-rule:nonzero;} 
+   
+        </style>
+    </defs>
+    <g>
+      <circle cx="66.5" cy="165" r="170" fill="#90b6f8"/>
+      <path class="fil0" d="M77 257l-11 61 -10 -61 -11 15c-1,-15 -4,-35 9,-44 -5,5 -8,15 -7,29l11 -14 8 51 9 -51 10 14c2,-14 -1,-24 -6,-29 13,9 10,29 9,44l-11 -15z"/>
+      <path class="fil1" d="M7 184l0 23 43 -23c1,6 3,13 5,19l23 0c2,-6 3,-13 5,-19l43 23 0 -23 -33 -44c4,-18 6,-35 4,-53 -3,-28 -16,-52 -31,-75 -14,23 -27,48 -30,75 -2,18 0,36 3,53l-32 44z"/>
+      <rect class="fil1" x="50" y="214" width="32.0759" height="8.8048"/>
+      <path class="fil3" d="M66 60c12,0 21,9 21,20 0,11 -9,20 -21,20 -11,0 -20,-9 -20,-20 0,-11 9,-20 20,-20z"/>
+    </g>
+</svg>

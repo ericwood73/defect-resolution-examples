@@ -2,6 +2,7 @@ import { MeshBuilder, StandardMaterial, Texture, PointerDragBehavior, Color3 } f
 import { getScene } from "./scene";
 import { getState, getCurrentUserId } from "./state";
 import { debugLog } from "../common/util";
+import { fire } from "./events";
 
 let _localAvatar = null;
 
@@ -36,7 +37,13 @@ export const createRemoteAvatar = (userId) => {
 
     const { initials, position } = user;
 
-    _avatars.set(userId, createAvatar(initials, position));
+    const avatar = createAvatar(initials, position);
+    if (avatar) {
+        _avatars.set(userId, avatar);
+        fire('remoteAvatarCreated', userId);
+    } else {
+        console.warn("avatar.createRemoteAvatar: failed to create avatar for user ", userId);
+    }
 };
 
 export const getAvatar = (userId) => {

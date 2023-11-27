@@ -14,7 +14,11 @@ export const _init = () => {
 
     // Subscribe to the remote user position update event
     subscribe(eventNames.userPositionUpdated, onUserPositionUpdated);
-}
+};
+
+export const getCurrentRoomId = () => {
+    return _currentRoomId;
+};
 
 const onUserJoinedRoom = ({ userId, roomId }) => {
     debugLog('room', 'room-state.onUserJoinedRoom: userId, roomId = ', userId, roomId);

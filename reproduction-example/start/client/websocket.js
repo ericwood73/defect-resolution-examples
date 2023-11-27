@@ -1,7 +1,9 @@
 import { debugLog } from '../common/util';
 import { fire } from './events';
 
-const serverUrl = 'ws://localhost:3000/ws';
+// get the host rom the borwser url without the port
+const host = window.location.host.split(':')[0];
+const serverUrl = `ws://${host}:3000/ws`;
 let socket = null;
 
 export const connect = async () => {

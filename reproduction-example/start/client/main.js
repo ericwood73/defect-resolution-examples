@@ -5,6 +5,7 @@ import { _init as initState } from './state';
 import { _init as initRoom, joinRoom } from './room';
 import { _init as initRoomState } from './room-state';
 import { _init as initScene } from './scene';
+import { _init as initBoost } from './boost';
 import { clientMessageNames } from '../common/client-message-names';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,6 +36,7 @@ const flow = async () => {
     const canvas = document.getElementById('canvas');
     initScene(canvas);
     initRoomState();
+    initBoost();
 };
 
 const connectAndWaitForInitialState = async () => {
