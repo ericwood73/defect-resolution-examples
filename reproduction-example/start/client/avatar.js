@@ -4,15 +4,19 @@ import { getState, getCurrentUserId } from "./state";
 import { debugLog } from "../common/util";
 import { fire } from "./events";
 
-let _localAvatar = null;
+let _localUserAvatar = null;
 
 // Key is userId, value is avatar mesh
 const _avatars = new Map();
 
 export const createLocalAvatar = () => {
     const { initials } = getState('users', getCurrentUserId());
-    _localAvatar = createAvatar(initials,
+    _localUserAvatar = createAvatar(initials,
                         randomPosition({x: -5, y: -5}, {x: 5, y: 5}));
+    addDragBehavior(_localUserAvatar);
+
+    // Makes sure we send the initial position to the server
+    _localUserAvatar.needsUpdate = true;
 };
 
 export const createRemoteAvatar = (userId) => {
@@ -35,9 +39,11 @@ export const createRemoteAvatar = (userId) => {
         return;
     }
 
-    const { initials, position } = user;
+    const { initials } = user;
 
-    const avatar = createAvatar(initials, position);
+    const position = getState('userPositions', userId)?.position;
+
+    const avatar = createAvatar(initials, position, userId);
     if (avatar) {
         _avatars.set(userId, avatar);
         fire('remoteAvatarCreated', userId);
@@ -46,7 +52,11 @@ export const createRemoteAvatar = (userId) => {
     }
 };
 
-export const getAvatar = (userId) => {
+export const getLocalUserAvatar = () => {
+    return _localUserAvatar;
+}
+
+export const getRemoteUserAvatar = (userId) => {
     return _avatars.get(userId);
 };
 
@@ -63,7 +73,7 @@ export const clearAvatars = () => {
     _avatars.clear();
 };
 
-const createAvatar = (initials, position) => {
+const createAvatar = (initials, position, userId) => {
     debugLog('avatar', "avatar.createAvatar: initials, position = ", initials, position);
     const avtMesh = MeshBuilder.CreateDisc(`${initials}_avt_mesh`, {
         radius: 1,
@@ -96,9 +106,17 @@ const createAvatar = (initials, position) => {
         avtMesh.position.set(position.x, position.y, -1);
     }
 
-    avtMesh.addBehavior(new PointerDragBehavior({dragPlaneNormal: BABYLON.Axis.Z}));
+    avtMesh.userId = userId;
 
     return avtMesh;
+};
+
+const addDragBehavior = (avatar) => {
+    const dragBehavior = new PointerDragBehavior({dragPlaneNormal: BABYLON.Axis.Z});
+    dragBehavior.onDragObservable.add((event) => {
+        avatar.needsUpdate = true;
+    });
+    avatar.addBehavior(dragBehavior);
 };
 
 const randomColor = (min, max) => {

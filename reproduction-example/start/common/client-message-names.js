@@ -1,4 +1,5 @@
 export const clientMessageNames = {
     "joinRoom": "joinRoom",
-    "updateUser": "updateUser"
+    "updateUser": "updateUser",
+    "updateUserPosition": "updateUserPosition"
 };

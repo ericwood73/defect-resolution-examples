@@ -12,7 +12,7 @@ import _cooldownMaterialJson from './assets/cooldownMaterial.json';
 import { eventNames, subscribe } from './events';
 import { getCurrentUserId, getState } from './state';
 import { getCurrentRoomId } from './room-state';
-import { getAvatar } from './avatar';
+import { getRemoteUserAvatar } from './avatar';
 import { getScene } from './scene';
 import { getImmutableSnapshot } from '../common/util';
 
@@ -50,7 +50,7 @@ export const _init = async () => {
     subscribe(eventNames.remoteAvatarCreated, getOrCreateBoostUI);
 
     // If we missed the scene ready, initialize the base UI mesh.
-    const scene = getCurrentScene()
+    const scene = getScene()
     if (!_baseBoostUIMesh && scene) {
         initializeForScene(scene);
     }
@@ -147,7 +147,7 @@ const getOrCreateBoostUI = (usrId) => {
         return;
     }
 
-    const avtMesh = getAvatar(usrId);
+    const avtMesh = getRemoteUserAvatar(usrId);
     if (!avtMesh) {
         console.warn("In boost.getOrCreateBoostUI - avatar mesh not found for usrId: ", usrId);
         return;

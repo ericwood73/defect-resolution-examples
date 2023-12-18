@@ -47,5 +47,25 @@ export const createScene = (canvas) => {
     fire(eventNames.sceneCreated, _scene);
 };
 
+export const callOnRender = (callback, interval = null) => {
+    // Create an observer that will call the given callback no 
+    // more than once per interval
+    const observer = _scene.onBeforeRenderObservable.add(() => {
+        if (!interval) {
+            callback();
+            return;
+        }
+
+        const currentTime = performance.now();
+        if (!observer._lastCallTime ||
+            currentTime - observer._lastCallTime >= interval) {
+            observer._lastCallTime = currentTime;
+            callback();
+        }
+    });
+    return observer;
+};
+
+
 
 

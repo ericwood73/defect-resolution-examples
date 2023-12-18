@@ -3,7 +3,7 @@ import fastifyWebsocket from '@fastify/websocket';
 import { uuidv4 } from '../common/util.js';
 import { getRooms, joinRoom, leaveRoom } from './room.js';
 import { registerUser, unregisterUser } from './websocket.js';
-import { getUsers, updateUser, removeUser } from './user.js';
+import { getUsers, updateUser, updateUserPosition, removeUser, getUserPositions } from './user.js';
 import { clientMessageNames } from '../common/client-message-names.js';
 
 // Fastify Hot Reload Support
@@ -54,6 +54,7 @@ export const pushInitialState = (connection, req) => {
             userId: connection.userId,
             rooms: getRooms(),
             users: getUsers(),
+            userPositions: getUserPositions(),
         }
     }));
 };
@@ -88,5 +89,6 @@ const handleMessage = (connection, req, messageData) => {
 
 const messageHandlers = {
     [clientMessageNames.joinRoom]: joinRoom,
-    [clientMessageNames.updateUser]: updateUser
+    [clientMessageNames.updateUser]: updateUser,
+    [clientMessageNames.updateUserPosition]: updateUserPosition
 };
