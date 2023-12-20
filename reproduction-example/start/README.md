@@ -1,5 +1,5 @@
-# Reproduction Example
-In this exercise, we have introduced a defect with unkown reproduction steps.  The assignment is to determine how to reproduce the defect.  If you wish, you can also perform root cause analysis and fix the defect.  The solution is in the `final` folder.
+# Reproduction Example Start
+In this exercise, we have introduced a defect with unkown reproduction steps.  The assignment is to determine how to reproduce the defect.  If you wish, you can also perform root cause analysis and identify failed assumptions.  The solution is in the `final` folder.
 
 ## App Decription
 This is a social app where users can get together and have avatars with voice and video chat as well as share content.  At this stage, the functionality that has been implemented is limited to multiple users having avatars that can be moved around the room.  We have begun to implement a feature called "boost".  The boost feature is intended to allow users to express appreciation for the actions or words of another user.  The boost feature is activated when a user clicks on another users boost UI, which looks like a rocket.  The boost feature has a cooldown before it can be used again for that user. 

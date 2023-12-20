@@ -1,0 +1,2 @@
+# Reproduction Example Solution
+Here is the ![solution](./solution.md) for the reproduction-example exercise which is described ![here](../start/README.md).  If you have not completed the exercise and wish to, do not read this file as it will reveal the steps to reproduce, the root cause and the implmented fix.  It is highy recommended to review the exercise before viewing the solution.
