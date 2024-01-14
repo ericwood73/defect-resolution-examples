@@ -1,4 +1,4 @@
-# Reproduction Example Start
+# Boost UI Background Issue Example Start
 In this exercise, we have introduced a defect with unkown reproduction steps.  The assignment is to determine how to reproduce the defect.  If you wish, you can also perform root cause analysis and identify failed assumptions.  The solution is in the `final` folder.
 
 ## App Decription
