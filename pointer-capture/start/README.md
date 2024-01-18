@@ -1,5 +1,5 @@
 # Pointer Capture Issue Example Start
-In this exercise, we have introduced a defect with unkown reproduction steps.  In fact, the example is currently not configured to produce the defect.  The assignment is to determine how to correct the defect, ,eaning you will first need to figure out how to reproduce it. The solution is in the `final` folder.
+In this exercise, we have introduced a defect with unknown reproduction steps.  In fact, the example is currently not configured to produce the defect.  The assignment is to determine how to correct the defect, ,eaning you will first need to figure out how to reproduce it. The solution is in the `final` folder.
 
 ## Running the example
 To run the example:

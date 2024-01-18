@@ -9,11 +9,12 @@ import _pressedButtonSvg from './assets/boost-pressed.svg?raw';
 
 import _cooldownMaterialJson from './assets/cooldownMaterial.json';
 
-import { eventNames, subscribe } from './events';
+import { eventNames, fire, subscribe, subscribeOnce } from './events';
 import { getCurrentUserId, getState } from './state';
 import { getCurrentRoomId } from './room-state';
 import { getRemoteUserAvatar } from './avatar';
 import { getScene } from './scene';
+import { debugLog } from '../common/util';
 
 // These are cached only for the current scene (room)
 // This is the base mesh for the UI that will be instanced for each avatar mesh
@@ -36,17 +37,17 @@ const _uiStates = {
 
 let _boostReady = false;
 
+let boostedUsers = [];
+let sceneRenderObservable = null;
+
+const boostExpirationSeconds = 10;
+
 export const _init = async () => {
-    
+    // Initialize the boost effect
+    //initBoostEffect();
 
     // Subscribe to scene ready for current room and any future rooms joined
     subscribe(eventNames.sceneCreated, initializeForScene);
-
-    // Handle scene destroy
-    subscribe(eventNames.sceneDestroyed, () => _boostReady = false);
- 
-    // Create for any users that may join
-    subscribe(eventNames.remoteAvatarCreated, getOrCreateBoostUI);
 
     // If we missed the scene ready, initialize the base UI mesh.
     const scene = getScene()
@@ -66,7 +67,12 @@ const initializeForScene = (scene) => {
     currentRoom.users.forEach(userId => getOrCreateBoostUI(userId));
 
     // Create for any users that may join
-    subscribe(eventNames.remoteAvatarCreated, getOrCreateBoostUI);  
+    subscribe(eventNames.remoteAvatarCreated, getOrCreateBoostUI); 
+    
+    subscribeOnce(eventNames.sceneDestroyed, () => {
+        _boostReady = false;
+        _baseBoostUIMesh = null;
+    })
 };
 
 const initStates = () => {
@@ -137,6 +143,7 @@ const createBaseCooldownMaterial = (scene) => {
 };
 
 const getOrCreateBoostUI = (usrId) => {
+    debugLog("boost", "In boost.getOrCreateBoostUI - usrId: ", usrId);
     if (!_boostReady) {
         return;    
     }
@@ -197,7 +204,7 @@ const createForAvatar = (usrId, avtMesh) => {
             // We need to get the boostUI from the event rather than relying on 
             // the boostUIMesh which could be the wrong boost UI somehow.
             const boostUI = e.meshUnderPointer;
-            setState(boostUI, _uiStates.pressed);
+            setState(boostUIMesh, _uiStates.pressed);
         }
     ));
     
@@ -210,7 +217,7 @@ const createForAvatar = (usrId, avtMesh) => {
 const createBoostUI = (avatarMesh) => {
     // Create a boost ui for this avatar by cloning the base
     let boostUIInstance, cooldownInstance;
-    _baseBoostUIMesh.instantiateHierarchy(
+    const boostUIMesh = _baseBoostUIMesh.instantiateHierarchy(
         avatarMesh, // New parent
         {doNotInstantiate: true}, // Options
         // Capture the new instances
@@ -231,12 +238,57 @@ const createBoostUI = (avatarMesh) => {
 
     boostUIInstance.setEnabled(true);
 
+    // Hack to workaround the pointer out being triggered twice when the pointer leaves the boostUI
+    // due to a bug in babylonjs.  See https://forum.babylonjs.com/t/triggering-pointer-out-actions-when-camera-change-causes-pointer-to-exit-mesh/39061/12
+    // Can be removed once we upgrade to a babylonjs release containing PR #13661
+    boostUIInstance.isBoostUI = true;
+
     return boostUIInstance;
 };
 
 const handleClick = (usrId, onCooldownComplete) => {
     startCooldown(usrId, 10, onCooldownComplete);
+    //updateBoostForUser(usrId);
 };
+
+const updateBoostForUser = (usrId) => {
+    const boostExpirationMs = boostExpirationSeconds * 1000;
+    const existingUser = boostedUsers.find(user => user.usrId === usrId);
+    if (existingUser) {
+        // Extend the boost expiration time
+        existingUser.boostExpiration += boostExpirationMs;
+    } else {
+        // Add the user to the list with boost expiration
+        boostedUsers.push({ 
+            usrId, 
+            expiration: Date.now() + boostExpirationMs
+        });
+        // Fire the boost initiated event
+        fire(eventNames.boostInitiated, usrId);
+    }
+
+    // Create the scene render observable if it doesn't exist
+    if (!sceneRenderObservable) {
+        sceneRenderObservable = scene.onBeforeRenderObservable.add(() => {
+            // Check the list and fire the boost expired event for users with expired boost
+            const currentTime = Date.now();
+            const expiredUsers = boostedUsers.filter(user => user.boostExpiration <= currentTime);
+            expiredUsers.forEach(user => {
+                // Fire the boost expired event
+                fire(eventNames.boostExpired, user.usrId);
+                // Remove the user from the list
+                boostedUsers = boostedUsers.filter(u => u.usrId !== user.usrId);
+            });
+
+            // Remove the scene render observable if there are no more boosted users
+            if (boostedUsers.length === 0) {
+                scene.onBeforeRenderObservable.remove(sceneRenderObservable);
+                sceneRenderObservable = null;
+            }
+        });
+    }
+};
+
 
 const startCooldown = (usrId, cooldownTime) => {
     const scene = getScene();

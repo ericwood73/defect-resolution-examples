@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for Defect Mastery Reproduction Example",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "fastify start -l info -p 3001 --watch --pretty-logs index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/websocket": "^8.2.0",
+    "fastify": "^4.24.3"
+  }
+}

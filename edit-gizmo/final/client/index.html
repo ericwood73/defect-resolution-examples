@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <script type="module" src="/main.js"></script>
+      <div id="canvas-container">
+        <canvas id="canvas"></canvas>
+      </div>
+      <div id="room-selection">
+        <label for="room-select">Select a room:</label>
+        <select id="room-select">
+          <option value="new-room">Create a new room</option>
+          <option value="room-1" selected>Room 1</option>
+        </select>
+      </div>
+      <div id="edit-toolbar" class="edit-mode-disabled">
+        <!-- Edit Mode Button -->
+        <button id="edit-mode-button" ></button>
+
+        <!-- Add Image Button -->
+        <button id="add-image-button"></button>
+      </div>
+
+      <!-- Create Room Modal -->
+      <div id="create-room-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class = "modal-header">
+            <h2>Create Room</h2>
+            <span id="create-room-cancel" class="button">&times;</span>
+          </div>
+          <form id="create-room-form" class="form-group">
+            <label for="room-name">Room Name:</label>
+            <input type="text" id="create-room-name" name="room-name" required>
+            <label for="room-background-url">Room Background URL:</label>
+            <input type="url" id="create-room-background-url" name="room-background-url" required>
+            <button type="button">Create</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Add Image Modal -->
+      <div id="add-image-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h2>Add Image</h2>
+              <span id="add-image-cancel" class="button">&times;</span>
+          </div>
+          <form id="add-image-form" class="form-group">
+              <label for="image-url">Image URL:</label>
+              <input type="url" id="add-image-url-input" name="image-url" required>
+              <button type="button">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -204,7 +204,7 @@ const createForAvatar = (usrId, avtMesh) => {
             // We need to get the boostUI from the event rather than relying on 
             // the boostUIMesh which could be the wrong boost UI somehow.
             const boostUI = e.meshUnderPointer;
-            setState(boostUIMesh, _uiStates.pressed);
+            setState(boostUI, _uiStates.pressed);
         }
     ));
     
@@ -217,7 +217,7 @@ const createForAvatar = (usrId, avtMesh) => {
 const createBoostUI = (avatarMesh) => {
     // Create a boost ui for this avatar by cloning the base
     let boostUIInstance, cooldownInstance;
-    const boostUIMesh = _baseBoostUIMesh.instantiateHierarchy(
+    _baseBoostUIMesh.instantiateHierarchy(
         avatarMesh, // New parent
         {doNotInstantiate: true}, // Options
         // Capture the new instances
